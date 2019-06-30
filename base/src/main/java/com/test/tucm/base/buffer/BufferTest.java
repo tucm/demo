@@ -13,6 +13,7 @@ public class BufferTest {
 
     public static void main(String[] args) {
         System.out.println("----------Test allocate--------");
+        //Runtime.getRuntime().freeMemory()该进程占用的堆内存大小(字节)
         System.out.println("before alocate:" + Runtime.getRuntime().freeMemory());
         // 如果分配的内存过小，调用Runtime.getRuntime().freeMemory()大小不会变化？
         //allocate从堆空间中分配一个容量大小为capacity的byte数组作为缓冲区的byte数据存储器
