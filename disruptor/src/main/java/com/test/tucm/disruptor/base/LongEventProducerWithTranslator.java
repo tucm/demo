@@ -7,12 +7,11 @@ import java.nio.ByteBuffer;
 
 /**
  * @ClassName LongEventProducerWithTranslator
- * @Description TODO
+ * @Description 生产者实现二
  * @Author TUCM
  * @Date 2019/6/28 15:27
  * @Version 1.0
  **/
-//生产者实现二
 public class LongEventProducerWithTranslator {
     // 使用EventTranslator, 封装 获取Event的过程
     private static final EventTranslatorOneArg<LongEvent, ByteBuffer> TRANSLATOR = new EventTranslatorOneArg<LongEvent, ByteBuffer>() {
@@ -28,7 +27,7 @@ public class LongEventProducerWithTranslator {
         this.ringBuffer = ringBuffer;
     }
 
-    public void produceData(ByteBuffer buffer){
+    public void produceData(ByteBuffer buffer) {
         // 发布
         ringBuffer.publishEvent(TRANSLATOR, buffer);
     }

@@ -6,21 +6,20 @@ import java.nio.ByteBuffer;
 
 /**
  * @ClassName LongEventProducer
- * @Description TODO
+ * @Description 生产者实现一
  * @Author TUCM
  * @Date 2019/6/28 15:26
  * @Version 1.0
  **/
-//生产者实现一
 public class LongEventProducer {
     // 生产者持有RingBuffer的引用
     private final RingBuffer<LongEvent> ringBuffer;
 
-    public LongEventProducer(RingBuffer<LongEvent> ringBuffer){
+    public LongEventProducer(RingBuffer<LongEvent> ringBuffer) {
         this.ringBuffer = ringBuffer;
     }
 
-    public void produceData(ByteBuffer bb){
+    public void produceData(ByteBuffer bb) {
         // 获得下一个Event槽的下标
         long sequence = ringBuffer.next();
         try {
