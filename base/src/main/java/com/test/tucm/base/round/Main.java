@@ -9,15 +9,9 @@ package com.test.tucm.base.round;
  **/
 public class Main {
     public static void main(String[] args) {
-        for(int i=0;i<3;i++){
-            for(int j=0;j<2;j++){
-                if (i==1){
-                    //continue;
-                    break;
-                    //return;
-                }
-                System.out.println("i="+i+",j="+j);
-            }
-        }
+        byte bb = 10;
+        char i1 = 'a';
+        short b = bb;
+        System.out.print("end:" + b);
     }
 }

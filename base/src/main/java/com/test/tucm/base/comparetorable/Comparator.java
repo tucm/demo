@@ -9,10 +9,10 @@ package com.test.tucm.base.comparetorable;
  **/
 public class Comparator {
     public static void main(String[] args) {
-        Domain c1 = new Domain("c");
-        Domain c2 = new Domain("c");
-        Domain b = new Domain("b");
-        Domain d = new Domain("d");
+        DomainComparable c1 = new DomainComparable("c");
+        DomainComparable c2 = new DomainComparable("c");
+        DomainComparable b = new DomainComparable("b");
+        DomainComparable d = new DomainComparable("d");
         DomainComparator dc = new DomainComparator();
         System.out.println(dc.compare(c1, c2));
         System.out.println(dc.compare(c1, b));

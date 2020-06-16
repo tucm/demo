@@ -1,0 +1,22 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+    <!--    <weaver>-->
+    <!--        &lt;!&ndash; only weave classes in our application-specific packages &ndash;&gt;-->
+    <!--        <include within="foo.*"/>-->
+    <!--    </weaver>-->
+
+    <!--    <aspects>-->
+    <!--        &lt;!&ndash; weave in just this aspect &ndash;&gt;-->
+    <!--        <aspect name="foo.ProfilingAspect"/>-->
+    <!--    </aspects>-->
+    <weaver>
+        <include within="com.zzx.study.aspect.*"/>
+    </weaver>
+
+    <aspects>
+        <aspect name="com.zzx.study.aspect.AspectTest"/>
+    </aspects>
+
+</aspectj>
