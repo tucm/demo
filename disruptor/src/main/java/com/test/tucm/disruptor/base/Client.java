@@ -40,12 +40,12 @@ public class Client {
         Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(factory, ringBufferSize, executor, ProducerType.SINGLE, new YieldingWaitStrategy());
         // 注册事件消费处理器, 也即消费者. 可传入多个EventHandler ...
         //多消费者不重复进行消费
-        LongEventConsumer[] consumers = new LongEventConsumer[10];
-        for (int i = 0; i < consumers.length; i++) {
-            consumers[i] = new LongEventConsumer();
-        }
-        disruptor.handleEventsWithWorkerPool(consumers);
-        //disruptor.handleEventsWith(new LongEventHandler());
+        // LongEventConsumer[] consumers = new LongEventConsumer[10];
+        //for (int i = 0; i < consumers.length; i++) {
+        //  consumers[i] = new LongEventConsumer();
+        //}
+        //disruptor.handleEventsWithWorkerPool(consumers);
+        disruptor.handleEventsWith(new LongEventHandler());
         // 启动
         disruptor.start();
 
