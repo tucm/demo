@@ -9,9 +9,10 @@ import com.lmax.disruptor.WorkHandler;
  * @Date 2019-06-30 19:13
  * @Version 1.0
  **/
-public class MyWorkHandler implements WorkHandler {
+public class MyWorkHandler implements WorkHandler<LongEvent> {
     @Override
-    public void onEvent(Object o) throws Exception {
+    public void onEvent(LongEvent longEvent) throws Exception {
+        System.out.println("myHandler:" + longEvent.getValue());
 
     }
 }

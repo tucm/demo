@@ -1,6 +1,7 @@
 package com.test.tucm.disruptor.base;
 
 
+import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
@@ -22,10 +23,10 @@ public class Client {
     public static void main(String[] args) throws Exception {
 
         //1.配置并获得Disruptor
-        ExecutorService executor = Executors.newCachedThreadPool();
+        ExecutorService executor = Executors.newFixedThreadPool(2);
         LongEventFactory factory = new LongEventFactory();
         // 设置RingBuffer大小, 需为2的N次方(能将求模运算转为位运算提高效率 ), 否则影响性能
-        int ringBufferSize = 1024 * 1024;
+        int ringBufferSize = 4;
 
         //创建disruptor, 泛型参数:传递的事件的类型
         // 第一个参数: 产生Event的工厂类, Event封装生成-消费的数据
@@ -40,12 +41,12 @@ public class Client {
         Disruptor<LongEvent> disruptor = new Disruptor<LongEvent>(factory, ringBufferSize, executor, ProducerType.SINGLE, new YieldingWaitStrategy());
         // 注册事件消费处理器, 也即消费者. 可传入多个EventHandler ...
         //多消费者不重复进行消费
-        // LongEventConsumer[] consumers = new LongEventConsumer[10];
-        //for (int i = 0; i < consumers.length; i++) {
-        //  consumers[i] = new LongEventConsumer();
-        //}
-        //disruptor.handleEventsWithWorkerPool(consumers);
-        disruptor.handleEventsWith(new LongEventHandler());
+        MyWorkHandler[] consumers = new MyWorkHandler[10];
+        for (int i = 0; i < consumers.length; i++) {
+          consumers[i] = new MyWorkHandler();
+        }
+        disruptor.handleEventsWithWorkerPool(consumers);
+        //disruptor.handleEventsWith(new LongEventHandler());
         // 启动
         disruptor.start();
 
@@ -55,10 +56,14 @@ public class Client {
         //LongEventProducer producer = new LongEventProducer(ringBuffer);
         LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
 
-        ByteBuffer byteBuffer = ByteBuffer.allocate(8); // 这里只是笔者实验, 不是必须要用ByteBuffer保存long数据
-        for(int i = 0; i < 100; ++i){
+        ByteBuffer byteBuffer = ByteBuffer.allocate(8); // 这里只是实验, 不是必须要用ByteBuffer保存long数据
+        for(int i = 0; i < 10; ++i){
             byteBuffer.putLong(0, i);
             producer.produceData(byteBuffer);
+            Thread.sleep(500);
+            if (i>4){
+                Thread.sleep(5000);
+            }
         }
 
         disruptor.shutdown(); //关闭 disruptor  阻塞直至所有事件都得到处理
