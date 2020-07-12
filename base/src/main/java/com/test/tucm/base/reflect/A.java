@@ -8,6 +8,7 @@ package com.test.tucm.base.reflect;
  * @Version 1.0
  **/
 public class A {
+
     public void hello(String a) {
         System.out.println("hello world:" + a);
     }
