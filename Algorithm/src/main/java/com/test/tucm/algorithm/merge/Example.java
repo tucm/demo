@@ -11,7 +11,7 @@ import java.util.Arrays;
  **/
 public class Example {
     public static void main(String[] args) {
-        int[] arr = {49, 38, 65, 97, 76, 13, 27, 50};
+        int[] arr = {9, 8, 8, 6, 5, 4, 3};
         int[] tmp = new int[arr.length];
         System.out.println("原始数据: " + Arrays.toString(arr));
         customMergeSort(arr, tmp, 0, arr.length - 1);
@@ -31,7 +31,7 @@ public class Example {
         // 对右侧子序列进行递归排序
         customMergeSort(a, tmp, mid + 1, end);
         // 合并
-        customDoubleMerge(a, tmp, start, mid, end);
+        merge(a, tmp, start, mid, end);
 
     }
 
@@ -63,8 +63,7 @@ public class Example {
     }
 
 
-    private void merge(int[] array, int start, int middle, int end) {
-        int[] temp = new int[array.length];
+    private static void merge(int[] array, int[] temp, int start, int middle, int end) {
         //前半段数据游标
         int i = start;
         //后半段数据游标
@@ -78,13 +77,16 @@ public class Example {
                 temp[k++] = array[j++];
             }
         }
-        //最后讲剩余的数据全部追加进临时数组
+        //如果第一个序列未检测完，直接将后面所有元素加到合并的序列中
         while (i <= middle) {
             temp[k++] = array[i++];
         }
+        //同上
         while (j <= end) {
             temp[k++] = array[j++];
         }
+
+        //最后讲剩余的数据全部追加进临时数组
         for (int l = start; l <= end; l++) {
             array[l] = temp[l];
         }
