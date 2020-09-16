@@ -1,7 +1,6 @@
 package com.test.tucm.algorithm.practice;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 实践
@@ -9,7 +8,7 @@ import java.util.Map;
 public class Practice {
 
     public static void main(String[] args) {
-        p3();
+        p5();
 
     }
 
@@ -92,6 +91,80 @@ public class Practice {
 
         }
 
+    }
+
+    /**
+     * 问题：
+     * 给定一个字符串，逐个翻转字符串中的每个单词。例如，输入："This is a good example"，输出："example good a is This"
+     * 分析：
+     * 排序类问题
+     * 跟顺序有关，且是倒序，考虑使用栈
+     */
+    public static void p4() {
+        String data = "This is a good example";
+        Stack stack = new Stack();
+        String[] array = data.split(" +");
+        for (int i = 0; i < array.length; i++) {
+            stack.push(array[i]);
+        }
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
+        }
+    }
+
+    /**
+     * 给定一棵树，按照层次顺序遍历并打印这棵树
+     * 二叉树的遍历问题
+     * 排除：前序、中序、后序遍历
+     * 经分析，遍历优先顺序为，上比下优先，左比右优先
+     */
+    public static void p5() {
+        //TODO 构造树结构
+        Node<Integer> root = getNode();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node<Integer> temp = queue.poll();
+            System.out.print(temp.data + "-");
+            if (temp.left != null) {
+                queue.offer(temp.left);
+            }
+            if (temp.right != null) {
+                queue.offer(temp.right);
+            }
+        }
+    }
+
+    /**
+     * 构造树对象
+     *
+     * @return
+     */
+    public static Node<Integer> getNode() {
+        Node<Integer> node16 = new Node<>();
+        Node<Integer> node13 = new Node<>();
+        Node<Integer> node10 = new Node<>();
+        node10.setNode(10);
+        Node<Integer> node15 = new Node<>();
+        node15.setNode(15);
+        node13.setNode(13);
+        node13.setLeft(node10);
+        node13.setRight(node15);
+        Node<Integer> node21 = new Node<>();
+        node21.setNode(21);
+        Node<Integer> node26 = new Node<>();
+        node26.setNode(26);
+        Node<Integer> node22 = new Node<>();
+        node22.setNode(22);
+        node22.setLeft(node21);
+        node22.setRight(node26);
+        Node<Integer> node20 = new Node<>();
+        node20.setRight(node22);
+        node20.setNode(20);
+        node16.setLeft(node13);
+        node16.setRight(node20);
+        node16.setNode(16);
+        return node16;
     }
 
 
