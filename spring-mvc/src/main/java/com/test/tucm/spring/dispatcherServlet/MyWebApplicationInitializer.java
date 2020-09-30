@@ -1,17 +1,13 @@
 package com.test.tucm.spring.dispatcherServlet;
 
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.XmlWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 
 /**
  * @ClassName MyWebApplicationInitializer
- * @Description
- *              以api的方式初始化DispatcherServlet
- *              另还有以web.xml的方式初始化
+ * @Description 以api的方式初始化DispatcherServlet
+ * 另还有以web.xml的方式初始化
  * @Author owl
  * @Date 2020-06-13 16:58
  * @Version 1.0
@@ -33,12 +29,12 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         //registration.setLoadOnStartup(1);
         //registration.addMapping("/app/*");
 
-        XmlWebApplicationContext appContext = new XmlWebApplicationContext();
-        appContext.setConfigLocation("classpath:/app-context.xml");
-
-        ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", new DispatcherServlet(appContext));
-        registration.setLoadOnStartup(1);
-        registration.addMapping("/");
+//        XmlWebApplicationContext appContext = new XmlWebApplicationContext();
+//        appContext.setConfigLocation("classpath:/innerApplicationContext.xml");
+//
+//        ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", new DispatcherServlet(appContext));
+//        registration.setLoadOnStartup(1);
+//        registration.addMapping("/");
 
 
     }
