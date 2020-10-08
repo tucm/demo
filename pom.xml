@@ -19,6 +19,7 @@
         <module>spring-other</module>
         <module>spring-mvc-innner</module>
         <module>spring-custom-xml</module>
+        <module>pattern</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,1 +1,1 @@
-http\://xmltest.com/schema=com.test.tucm.springcustomxml.handlers.XMLTesthandler
+http\://xmltest.com/schema=com.test.tucm.springcustomxml.namespacehandler.XMLTestNamespaceHandler
